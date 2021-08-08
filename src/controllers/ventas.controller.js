@@ -21,6 +21,9 @@ ventaCtrl.getVentasByDate = async (req, res) => {
     res.json(ventas);
 };
 
+ventaCtrl.getHolaMundo = async (req, res) => {
+    res.send('Hola Mundo');
+}
 /**
  * Obtener el total de ingresos en un rango de fechas.
  * */

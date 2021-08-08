@@ -14,4 +14,5 @@ router.get('/get-prod-mas-vendidos', ventaCtrl.getProductosMasVendidos);
 router.get('/get-ranked-metodos', ventaCtrl.getRankedMetodosPago);
 router.get('/get-ventas-by-zone', ventaCtrl.getVentasByZone);
 router.get('/get-ingresos-per-day', ventaCtrl.getIngresoPorDia);
+router.get('/get-hola-mundo', ventaCtrl.getHolaMundo);
 module.exports = router;
