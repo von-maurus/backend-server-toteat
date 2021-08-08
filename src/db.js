@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 import config from './config';
 const uri = config.mongodbURL;
 
-
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
