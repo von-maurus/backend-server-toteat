@@ -4,7 +4,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 ###
@@ -13,7 +13,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 ###
@@ -22,7 +22,8 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00",
+    "name": "Rodrigo Matamala"
 }
 
 ###
@@ -31,7 +32,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 ###
@@ -40,7 +41,8 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00",
+    "name": "Sebastian Hernandez"
 }
 
 ###
@@ -49,7 +51,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 ###
@@ -58,7 +60,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 ###
@@ -67,7 +69,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 ###
@@ -76,7 +78,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 ###
@@ -85,7 +87,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 ###
@@ -94,7 +96,7 @@ content-type: application/json
 
 {
     "inicio":"2019-01-01 14:00:00",
-    "fin": "2019-01-01 14:06:00"
+    "fin": "2019-01-01 14:10:00"
 }
 
 # GET http://localhost:4000/api/ventas/

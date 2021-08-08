@@ -151,7 +151,7 @@ ventaCtrl.getCategoriasMasRentables = async (req, res) => {
 ventaCtrl.getProductosMasVendidos = async (req, res) => {
     var inicio = req.body['inicio'];
     var fin = req.body['fin'];
-    // { "name", "cantidad"}
+    // { "name", "cantidad", "montoTotal"}
     var rankedProductos = [];
     const ventas = await Venta.aggregate(
         [
@@ -170,10 +170,12 @@ ventaCtrl.getProductosMasVendidos = async (req, res) => {
             let index = rankedProductos.findIndex((r) => r.name == product.name);
             if (index != -1) {
                 rankedProductos[index].cantidad += 1;
+                rankedProductos[index].montoTotal += product.price * product.quantity;
             } else {
                 rankedProductos.push({
                     "name": product.name,
                     "cantidad": 1,
+                    "montoTotal": product.price * product.quantity
                 });
             }
         });
@@ -270,7 +272,7 @@ ventaCtrl.getRankedMetodosPago = async (req, res) => {
                     rankedMasRentablesByZone.push({
                         "nombre": p.type,
                         "montoTotal": p.amount,
-                        "zone": venta.zone
+                        "zone": venta.zone,
                     });
                 }
                 let indexUsed = rankedMasUsadosByZone.findIndex((e) => e.nombre == p.type && e.zone == venta.zone);
@@ -280,7 +282,8 @@ ventaCtrl.getRankedMetodosPago = async (req, res) => {
                     rankedMasUsadosByZone.push({
                         "nombre": p.type,
                         "cantidad": 1,
-                        "zone": venta.zone
+                        "zone": venta.zone,
+                        "monto": p.amount
                     });
                 }
             } else {
@@ -291,7 +294,7 @@ ventaCtrl.getRankedMetodosPago = async (req, res) => {
                     rankedMasRentablesByZone.push({
                         "nombre": p.type,
                         "montoTotal": p.amount,
-                        "zone": venta.zone
+                        "zone": venta.zone,
                     });
                 }
                 let indexUsed = rankedMasUsadosByZone.findIndex((e) => e.nombre == p.type && e.zone == venta.zone);
@@ -301,7 +304,8 @@ ventaCtrl.getRankedMetodosPago = async (req, res) => {
                     rankedMasUsadosByZone.push({
                         "nombre": p.type,
                         "cantidad": 1,
-                        "zone": venta.zone
+                        "zone": venta.zone,
+                        "monto": p.amount
                     });
                 }
             }
@@ -390,6 +394,7 @@ ventaCtrl.getIngresoPorDia = async (req, res) => {
     var fin = req.body['fin'];
     // {dia, montoTotal}
     var ingresosPerDay = [];
+    var dayName = '';
     var days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
     const ventas = await Venta.aggregate(
         [
@@ -408,18 +413,19 @@ ventaCtrl.getIngresoPorDia = async (req, res) => {
         ],
     );
     ventas.forEach((venta) => {
-        var d = venta.date_opened;
-        var dayName = days[d.getDay()];
-        let index = ingresosPerDay.findIndex((e) => e.dia == dayname);
+        var d = new Date(venta.date_opened);
+        console.log(d);
+        dayName = days[d.getDay()];
+        let index = ingresosPerDay.findIndex((e) => e.dia == dayName);
+        console.log(dayName);
         if (index != -1) {
             ingresosPerDay[index].montoTotal += venta.total;
         } else {
             ingresosPerDay.push({
-                "dia": dayname,
+                "dia": dayName,
                 "montoTotal": venta.total
             });
         }
-        console.log(dayName);
     });
     res.json(ingresosPerDay);
 };
