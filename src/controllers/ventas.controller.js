@@ -9,7 +9,13 @@ ventaCtrl.getVentasByDate = async (req, res) => {
     console.log('Body Params', req.body);
     var inicio = req.body['inicio'];
     var fin = req.body['fin'];
-    const ventas = await Venta.find({ date_opened: { $gte: new Date(inicio + 'Z'), $lte: new Date(fin + 'Z') } });
+    const ventas = await Venta.find(
+        {
+            date_opened: {
+                $gte: new Date(inicio + 'Z'),
+                $lte: new Date(fin + 'Z')
+            }
+        });
     // const zones = await Venta.distinct("table");
     // res.json(zones);
     res.json(ventas);
