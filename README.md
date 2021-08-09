@@ -1,6 +1,6 @@
 # ToteatApp
 
-Este proyecto es el backend de la app web "Toteaet", el cual es un ejercicio que consiste en mostrar reportabilidad obteniendo los datos desde un servidor usando MongoDB, Express, NodeJS y Angular 8+ 
+Este proyecto es el backend de la app web "La picada de la Esquina", la cual consiste en mostrar reportabilidad o "dashboard" de las ventas y trabajadores (meseros y cajeros) obteniendo datos desde un servidor usando MongoDB Atlas Starter Cluster, ExpressJS y principalmente NodeJS.
 
 ## Development server
 
