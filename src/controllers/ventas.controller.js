@@ -6,18 +6,21 @@ const Venta = require('../models/venta');
  * */
 ventaCtrl.getVentasByDate = async (req, res) => {
     // Se le agrega una Z al final de la fecha debido a que el servidor la transforma a UTC +3hrs
-    console.log('Body Params', req.body);
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    console.log('Body Params', req.query);
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     const ventas = await Venta.find(
         {
             date_opened: {
                 $gte: new Date(inicio + 'Z'),
                 $lte: new Date(fin + 'Z')
             }
-        });
-    // const zones = await Venta.distinct("table");
-    // res.json(zones);
+        }
+    );
+    // Obtener ingresos por dia
+
+    // // const zones = await Venta.distinct("table");
+    // // res.json(zones);
     res.json(ventas);
 };
 
@@ -28,8 +31,8 @@ ventaCtrl.getHolaMundo = async (req, res) => {
  * Obtener el total de ingresos en un rango de fechas.
  * */
 ventaCtrl.getIngresoTotalByDate = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     const montoTotalVentas = await Venta.aggregate(
         [
             {
@@ -64,8 +67,8 @@ ventaCtrl.getIngresoTotalByDate = async (req, res) => {
  * Obtener los productos mas rentables en un rango de fechas.
  * */
 ventaCtrl.getProductosMasRentables = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     // { "name", "total", "category"}
     var rankedProducts = [];
     const ventas = await Venta.aggregate(
@@ -108,8 +111,8 @@ ventaCtrl.getProductosMasRentables = async (req, res) => {
  * Obtener las categorias de productos mas rentables en un rango de fechas.
  * */
 ventaCtrl.getCategoriasMasRentables = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     // { "name", "total"}
     var rankedCategories = [];
     const ventas = await Venta.aggregate(
@@ -152,8 +155,8 @@ ventaCtrl.getCategoriasMasRentables = async (req, res) => {
  * Obtener los productos más vendidos en un rango de fechas.
  * */
 ventaCtrl.getProductosMasVendidos = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     // { "name", "cantidad", "montoTotal"}
     var rankedProductos = [];
     const ventas = await Venta.aggregate(
@@ -199,8 +202,8 @@ ventaCtrl.getProductosMasVendidos = async (req, res) => {
  * y por zona.
  * */
 ventaCtrl.getRankedMetodosPago = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     // {nombre, cantidad, monto}
     var rankedMasUsados = [];
     // {nombre, montoTotal}
@@ -352,8 +355,8 @@ ventaCtrl.getRankedMetodosPago = async (req, res) => {
  * fechas.
  * */
 ventaCtrl.getVentasByZone = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     // {zone, montoTotal}
     var rankedZones = [];
     const ventas = await Venta.aggregate(
@@ -393,8 +396,8 @@ ventaCtrl.getVentasByZone = async (req, res) => {
  * fechas. {dia, montoTotal}
  * */
 ventaCtrl.getIngresoPorDia = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     // {dia, montoTotal}
     var ingresosPerDay = [];
     var dayName = '';
@@ -438,9 +441,9 @@ ventaCtrl.getIngresoPorDia = async (req, res) => {
  * Obtener las ventas atendidas por un mesero en un rango de fechas.
  * */
 ventaCtrl.getWaiterVentasByDate = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
-    var name = req.body['name'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
+    var name = req.query['name'];
     const waiterVentas = await Venta.aggregate(
         [
             {
@@ -467,9 +470,9 @@ ventaCtrl.getWaiterVentasByDate = async (req, res) => {
  * Obtener las ventas registradas por un cajero en un rango de fechas.
  * */
 ventaCtrl.getCashierVentasByDate = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
-    var name = req.body['name'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
+    var name = req.query['name'];
     const cashierVentas = await Venta.aggregate(
         [
             {
@@ -498,8 +501,8 @@ ventaCtrl.getCashierVentasByDate = async (req, res) => {
  * En general y filtradas por Zona
  * */
 ventaCtrl.getRankedWaiters = async (req, res) => {
-    var inicio = req.body['inicio'];
-    var fin = req.body['fin'];
+    var inicio = req.query['inicio'];
+    var fin = req.query['fin'];
     // {nombre, cantidad }
     var waitersMasRentables = [];
     var waitersMasPersonasAtendidas = [];
